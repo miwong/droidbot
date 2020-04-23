@@ -28,7 +28,7 @@ class App(object):
         from androguard.core.bytecodes.apk import APK
         self.apk = APK(self.app_path)
         self.package_name = self.apk.get_package()
-        self.main_activity = self.apk.get_main_activity()
+        self.main_activity = self.apk.get_main_activity().replace("..", ".")
         self.permissions = self.apk.get_permissions()
         self.activities = self.apk.get_activities()
         self.possible_broadcasts = self.get_possible_broadcasts()
