@@ -885,15 +885,22 @@ class Device(object):
         get a random port on host machine to establish connection
         :return: a port number
         """
-        import socket
-        temp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        temp_sock.bind(("", 0))
-        port = temp_sock.getsockname()[1]
-        temp_sock.close()
-        if port in self.__used_ports:
-            return self.get_random_port()
-        self.__used_ports.append(port)
-        return port
+        #import socket
+        #temp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        #temp_sock.bind(("", 0))
+        #port = temp_sock.getsockname()[1]
+        #temp_sock.close()
+        #if port in self.__used_ports:
+        #    return self.get_random_port()
+        #self.__used_ports.append(port)
+        #return port
+
+        random_ports = list(range(12350, 12360))
+        for port in random_ports:
+            if not port in self.__used_ports:
+                self.__used_ports.append(port)
+                return port
+        return None
 
     def handle_rotation(self):
         if not self.adapters[self.minicap]:
